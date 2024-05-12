@@ -1,0 +1,29 @@
+// CreateProjectForm.js
+
+import React, { useState } from 'react';
+import axios from 'axios';
+
+const CreateProjectForm = () => {
+  const [name, setName] = useState('');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post('/projects', { name });
+      console.log('Project created:', response.data);
+      // Add logic to handle successful project creation
+    } catch (error) {
+      console.error('Error creating project:', error);
+      // Add logic to handle error
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
+      <button type="submit">Create Project</button>
+    </form>
+  );
+};
+
+export default CreateProjectForm;
